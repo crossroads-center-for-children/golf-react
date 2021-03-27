@@ -1,8 +1,8 @@
 import React from 'react';
-import { Box, Grid, Typography } from '@material-ui/core';
-import { Nav } from '../components';
+import { Grid } from '@material-ui/core';
+
 import styles from '../sass/SplashLayout.module.scss';
 
-export default function SplashLayout() {
+export default function SplashLayout(): JSX.Element {
   return <Grid className={styles.grid}></Grid>;
 }

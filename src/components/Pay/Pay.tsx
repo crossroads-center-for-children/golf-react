@@ -1,36 +1,19 @@
-import React, {
-  FC,
-  useEffect,
-  useState,
-  ChangeEvent,
-  SyntheticEvent,
-} from 'react';
+import { FC } from 'react';
 
 import { useDispatch } from 'react-redux';
-import {
-  Box,
-  Button,
-  Paper,
-  MenuItem,
-  Select,
-  TextField,
-  FormControl,
-  InputLabel,
-  Typography,
-} from '@material-ui/core';
+import { Box, Button, Typography } from '@material-ui/core';
 
 import { useSelector } from 'react-redux';
 
 import { RootState } from '../../store';
 import { Response } from '../../types/PayPal';
 
-import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
+import { PayPalButtons } from '@paypal/react-paypal-js';
 
 import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useTheme } from '@material-ui/core/styles';
-import { useNavigate } from 'react-router-dom';
 
 import {
   UnknownObject,
@@ -41,11 +24,6 @@ import { costs } from '../../constants/register';
 import { setStep } from '../../store/register';
 
 import styles from '../../sass/Register.module.scss';
-
-interface Select {
-  name?: string | undefined;
-  value: any;
-}
 
 const Pay: FC = () => {
   const theme = useTheme();
@@ -83,6 +61,7 @@ const Pay: FC = () => {
 
   const handleApprove = async (data: Response) => {
     const res = await data;
+    console.log(res);
   };
 
   const isLoading = () => {

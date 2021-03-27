@@ -1,8 +1,7 @@
 import React from 'react';
-import { Box, Grid, Typography } from '@material-ui/core';
-import { Nav } from '../components';
+import { Box, Grid } from '@material-ui/core';
 
-export default function MainLayout() {
+export default function MainLayout(): JSX.Element {
   return (
     <Grid>
       <Box></Box>

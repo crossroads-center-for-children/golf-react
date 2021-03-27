@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Box, TextField, Typography } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
 import ReactCountdown from 'react-countdown';
 
