@@ -1,0 +1,42 @@
+.leftBox {
+  width: 67vw;
+  height: calc(100vh - 100px);
+  padding: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-image: url('../images/sign-2.jpg');
+  background-repeat: no-repeat;
+  background-size:cover;
+  background-position: bottom;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+}
+
+.rightBox {
+ width: 33vw;
+ height: calc(100vh - 100px);
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+ padding: 50px;
+}
+
+.paper {
+  width: 25vw;
+  height: 55vh;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center
+}
+
+.formControlsBox {
+  padding: 20px;
+}
