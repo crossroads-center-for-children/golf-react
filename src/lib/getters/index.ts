@@ -1,0 +1,1 @@
+export { getPayPalClientId } from './secrets';
