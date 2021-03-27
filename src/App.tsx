@@ -20,7 +20,8 @@ function App() {
   ]);
 
   const initialOptions = {
-    'client-id': paypal.PAYPAL_CLIENT_ID,
+    'client-id':
+      process.env.REACT_APP_PAYPAL_CLIENT_ID || paypal.PAYPAL_CLIENT_ID,
     currency: 'USD',
     intent: 'capture',
   };
