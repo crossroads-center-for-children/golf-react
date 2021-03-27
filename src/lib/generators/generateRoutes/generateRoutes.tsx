@@ -1,5 +1,5 @@
 import { PartialRouteObject } from 'react-router';
-import { AsyncElement } from '../../components';
+import { AsyncElement } from '../../../components';
 
 const generateRoutes = (routes: any[]): PartialRouteObject[] => {
   return routes.map(({ path, componentName, layoutName, children }) => ({
