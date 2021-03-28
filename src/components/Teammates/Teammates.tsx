@@ -1,5 +1,5 @@
 import { FC, useState, ChangeEvent } from 'react';
-import { Box, Button, Paper, TextField, Typography } from '@material-ui/core';
+import { Box, Button, TextField, Typography } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

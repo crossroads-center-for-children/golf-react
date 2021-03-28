@@ -10,7 +10,7 @@ import { Response } from '../../types/PayPal';
 
 import { PayPalButtons } from '@paypal/react-paypal-js';
 
-import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useTheme } from '@material-ui/core/styles';
@@ -65,10 +65,6 @@ const Pay: FC = () => {
       setIsLoading(false);
     }
   }, [cost]);
-
-  const handleNextStep = () => {
-    dispatch(setStep(4));
-  };
 
   const handlePrevStep = () => {
     if (numGolfers === 1) {
