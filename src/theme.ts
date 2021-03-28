@@ -33,7 +33,7 @@ declare module '@material-ui/core/styles/createMuiTheme' {
 
 const theme = createMuiTheme({
   palette: {
-    type: 'light',
+    type: 'dark',
     background: {
       default: '#ffffff',
     },
