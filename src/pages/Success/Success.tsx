@@ -1,5 +1,7 @@
+import { useEffect, useState } from 'react';
 import { Box, Typography } from '@material-ui/core';
-import { useLocation } from 'react-router-dom';
+import { useTimeout } from 'react-use';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { costs } from '../../constants/register';
 import { Golfer } from '../../types';
 
@@ -12,7 +14,10 @@ interface Props {
 }
 
 export default function Success(): JSX.Element | null {
+  const navigate = useNavigate();
   const location = useLocation();
+  const [isReady] = useTimeout(5000);
+
   const {
     orderID,
     numGolfers,
@@ -32,6 +37,10 @@ export default function Success(): JSX.Element | null {
 
     return namesOfTeammates.join(', ');
   };
+
+  if (isReady()) {
+    window.location.href = 'http://crossroadcenter.org/2021-golf/';
+  }
 
   return (
     <Box>
@@ -55,6 +64,8 @@ export default function Success(): JSX.Element | null {
       {numGolfers === 1 ? null : (
         <Typography>{`Teammates: ${getNamesOfTeammates()}`}</Typography>
       )}
+
+      <Typography>Redirecting to Crossroads Center for Children...</Typography>
     </Box>
   );
 }
