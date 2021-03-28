@@ -50,13 +50,22 @@ const Pay: FC = () => {
 
   const [cost, setCost] = useState(0.01);
 
-  const isProduction = () => Boolean(process.env.NODE_ENV === 'production');
+  const [isDevelopment, setIsDevelopment] = useState(true);
+
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (isProduction()) {
+    const isProduction = () => Boolean(process.env.NODE_ENV == 'production');
+    setIsDevelopment(!isProduction());
+  }, [setIsDevelopment]);
+
+  useEffect(() => {
+    if (!isDevelopment) {
       setCost(costs[numGolfers]);
     }
-  }, [numGolfers]);
+
+    setIsLoading(false);
+  }, [isDevelopment, numGolfers]);
 
   const handleNextStep = () => {
     dispatch(setStep(4));
@@ -119,13 +128,7 @@ const Pay: FC = () => {
     }
   };
 
-  const isLoading = () => {
-    return Boolean(!numGolfers);
-  };
-
-  if (isLoading()) {
-    return null;
-  }
+  if (isLoading) return null;
 
   return (
     <Box className={styles.rightBox}>
