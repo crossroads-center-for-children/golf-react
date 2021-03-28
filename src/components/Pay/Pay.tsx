@@ -48,24 +48,23 @@ const Pay: FC = () => {
 
   const teammates = useSelector((state: RootState) => state.register.teammates);
 
-  const [cost, setCost] = useState(0.01);
-
-  const [isDevelopment, setIsDevelopment] = useState(true);
+  const [cost, setCost] = useState(0);
 
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const isProduction = () => Boolean(process.env.NODE_ENV == 'production');
-    setIsDevelopment(!isProduction());
-  }, [setIsDevelopment]);
-
-  useEffect(() => {
-    if (!isDevelopment) {
+    if (process.env.NODE_ENV !== 'production') {
+      setCost(0.01);
+    } else {
       setCost(costs[numGolfers]);
     }
+  }, [setCost, numGolfers]);
 
-    setIsLoading(false);
-  }, [isDevelopment, numGolfers]);
+  useEffect(() => {
+    if (cost) {
+      setIsLoading(false);
+    }
+  }, [cost]);
 
   const handleNextStep = () => {
     dispatch(setStep(4));
