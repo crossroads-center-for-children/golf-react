@@ -3,3 +3,4 @@ export type { default as Teammate } from './Teammate';
 export type { default as MapOfTeammates } from './MapOfTeammates';
 export type { default as Teammates } from './Teammates';
 export type { default as Route } from './Route';
+export type { default as Golfer } from './Golfer';
