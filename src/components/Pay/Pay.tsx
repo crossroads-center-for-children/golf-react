@@ -100,20 +100,22 @@ const Pay: FC = () => {
     const primary = getPrimary();
     const teammates = getTeammates();
 
-    if (orderID) {
-      await handleRegistration({
-        numGolfers,
-        primary,
-        teammates,
-        teamName,
-        orderNumber: orderID,
-      });
+    try {
+      if (orderID) {
+        await handleRegistration({
+          numGolfers,
+          primary,
+          teammates,
+          teamName,
+          orderNumber: orderID,
+        });
 
-      navigate('/success', {
-        state: { orderID, numGolfers, primary, teammates, teamName },
-      });
-    } else {
-      console.log('Error');
+        navigate('/success', {
+          state: { orderID, numGolfers, primary, teammates, teamName },
+        });
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 
