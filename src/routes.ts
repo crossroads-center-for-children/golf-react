@@ -12,6 +12,11 @@ const routes: any[] = [
     ],
   },
   {
+    path: 'success',
+    componentName: 'Success',
+    layoutName: 'MainLayout',
+  },
+  {
     path: '/',
     componentName: 'Splash',
     layoutName: 'SplashLayout',
