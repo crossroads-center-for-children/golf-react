@@ -154,35 +154,16 @@ const Pay: FC = () => {
           onClick={handlePrevStep}
           style={{
             marginRight: 10,
-            backgroundColor: theme.crossroads.teal,
+            backgroundColor: '#616161',
+            color: theme.crossroads.dark,
           }}
         >
           <FontAwesomeIcon
             icon={faArrowLeft}
-            style={{ marginRight: 5, color: 'white' }}
+            style={{ marginRight: 5 }}
             size="lg"
           />
-          <Typography style={{ fontWeight: 'bold', color: 'white' }}>
-            Go Back
-          </Typography>
-        </Button>
-
-        <Button
-          variant="contained"
-          onClick={handleNextStep}
-          style={{
-            backgroundColor: theme.crossroads.blue,
-            marginLeft: 10,
-          }}
-        >
-          <Typography style={{ fontWeight: 'bold', color: 'white' }}>
-            Finish
-          </Typography>
-          <FontAwesomeIcon
-            icon={faArrowRight}
-            size="lg"
-            style={{ marginLeft: 5, color: 'white' }}
-          />
+          <Typography style={{ fontWeight: 'bold' }}>Go Back</Typography>
         </Button>
       </Box>
     </Box>

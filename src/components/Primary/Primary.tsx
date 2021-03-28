@@ -106,8 +106,8 @@ const Primary: FC = () => {
   return (
     <Box className={styles.rightBox}>
       <Typography
-        variant="h4"
-        style={{ fontWeight: 'bold', color: theme.crossroads.dark }}
+        variant="h3"
+        style={{ fontWeight: 'bold', color: theme.crossroads.primary }}
       >
         Register
       </Typography>
@@ -176,7 +176,7 @@ const Primary: FC = () => {
             fontWeight: 'bold',
             backgroundColor: isDisabled()
               ? theme.crossroads.secondary
-              : theme.crossroads.blue,
+              : theme.crossroads.primary,
           }}
         >
           {getButtonText()}

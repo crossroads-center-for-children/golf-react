@@ -127,110 +127,107 @@ const Teammates: FC = () => {
 
   return (
     <Box className={styles.rightBox}>
-      <Paper className={styles.paper}>
-        <Typography
-          variant="h4"
-          style={{ fontWeight: 'bold', color: theme.crossroads.dark }}
-        >
-          {teamName}
-        </Typography>
+      <Typography
+        variant="h3"
+        style={{ fontWeight: 'bold', color: theme.crossroads.primary }}
+      >
+        {teamName}
+      </Typography>
 
-        <Box style={{ marginTop: 20 }}>
-          {new Array(numGolfers - 1).fill({}).map((teammate, idx) => (
+      <Box style={{ marginTop: 20 }}>
+        {new Array(numGolfers - 1).fill({}).map((teammate, idx) => (
+          <Box
+            key={teammate}
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              marginTop: 10,
+            }}
+          >
+            <Typography
+              variant="caption"
+              style={{ marginBottom: 10, color: theme.crossroads.light }}
+            >{`Teammate ${idx + 1}`}</Typography>
+
             <Box
-              key={teammate}
               style={{
                 display: 'flex',
-                flexDirection: 'column',
-                marginTop: 10,
+                flexDirection: 'row',
               }}
             >
-              <Typography
-                variant="caption"
-                style={{ marginBottom: 10 }}
-              >{`Teammate ${idx + 1}`}</Typography>
+              <TextField
+                fullWidth
+                variant="outlined"
+                label="First Name"
+                value={getFirstName(getId(idx))}
+                placeholder={getPlaceholderFirstName(idx)}
+                onChange={changeFirstName(getId(idx))}
+                style={{ marginRight: 5 }}
+              />
 
-              <Box
-                style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                }}
-              >
-                <TextField
-                  fullWidth
-                  variant="outlined"
-                  label="First Name"
-                  value={getFirstName(getId(idx))}
-                  placeholder={getPlaceholderFirstName(idx)}
-                  onChange={changeFirstName(getId(idx))}
-                  style={{ marginRight: 5 }}
-                />
-
-                <TextField
-                  fullWidth
-                  variant="outlined"
-                  label="Last Name"
-                  value={getLastName(getId(idx))}
-                  placeholder={getPlaceholderLastName(idx)}
-                  onChange={changeLastName(getId(idx))}
-                  style={{ marginLeft: 5 }}
-                />
-              </Box>
+              <TextField
+                fullWidth
+                variant="outlined"
+                label="Last Name"
+                value={getLastName(getId(idx))}
+                placeholder={getPlaceholderLastName(idx)}
+                onChange={changeLastName(getId(idx))}
+                style={{ marginLeft: 5 }}
+              />
             </Box>
-          ))}
-        </Box>
+          </Box>
+        ))}
+      </Box>
 
-        <Box
+      <Box
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          width: '100%',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: 20,
+        }}
+      >
+        <Button
+          variant="contained"
+          onClick={handlePrevStep}
           style={{
-            display: 'flex',
-            flexDirection: 'row',
-            width: '100%',
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginTop: 20,
+            marginRight: 10,
+            backgroundColor: '#616161',
+            color: theme.crossroads.dark,
           }}
         >
-          <Button
-            variant="contained"
-            onClick={handlePrevStep}
-            style={{
-              marginRight: 10,
-              backgroundColor: theme.crossroads.secondary,
-            }}
-          >
-            <FontAwesomeIcon
-              icon={faArrowLeft}
-              style={{ marginRight: 5, color: '#bdbdbd' }}
-              size="lg"
-            />
-            <Typography style={{ fontWeight: 'bold', color: '#bdbdbd' }}>
-              Go Back
-            </Typography>
-          </Button>
+          <FontAwesomeIcon
+            icon={faArrowLeft}
+            style={{ marginRight: 5 }}
+            size="lg"
+          />
+          <Typography style={{ fontWeight: 'bold' }}>Go Back</Typography>
+        </Button>
 
-          <Button
-            variant="contained"
-            onClick={handleNextStep}
-            disabled={isDisabled()}
-            style={{
-              color: isDisabled()
-                ? theme.crossroads.dark
-                : theme.crossroads.light,
-              backgroundColor: isDisabled()
-                ? theme.crossroads.secondary
-                : theme.crossroads.blue,
-              marginLeft: 10,
-            }}
-          >
-            <Typography style={{ fontWeight: 'bold' }}>Make Payment</Typography>
-            <FontAwesomeIcon
-              icon={faArrowRight}
-              size="lg"
-              style={{ marginLeft: 5 }}
-            />
-          </Button>
-        </Box>
-      </Paper>
+        <Button
+          variant="contained"
+          onClick={handleNextStep}
+          disabled={isDisabled()}
+          style={{
+            color: isDisabled()
+              ? theme.crossroads.dark
+              : theme.crossroads.light,
+            backgroundColor: isDisabled()
+              ? theme.crossroads.secondary
+              : theme.crossroads.primary,
+            marginLeft: 10,
+          }}
+        >
+          <Typography style={{ fontWeight: 'bold' }}>Make Payment</Typography>
+          <FontAwesomeIcon
+            icon={faArrowRight}
+            size="lg"
+            style={{ marginLeft: 5 }}
+          />
+        </Button>
+      </Box>
     </Box>
   );
 };
