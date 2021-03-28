@@ -26,6 +26,7 @@
     "react-router": "^6.0.0-beta.0",
     "react-router-dom": "^6.0.0-beta.0",
     "react-scripts": "4.0.3",
+    "react-use": "^17.2.1",
     "redux-logger": "^3.0.6",
     "sass": "^1.32.8",
     "typesafe-actions": "^5.1.0",
