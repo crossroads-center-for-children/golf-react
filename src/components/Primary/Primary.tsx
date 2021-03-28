@@ -86,7 +86,6 @@ const Primary: FC = () => {
   };
 
   const handleSelectNumGolfers = (e: ChangeEvent<Select>) => {
-    console.log('hitting', e);
     const golfers = e.target.value;
 
     setGolfers(golfers);
@@ -106,7 +105,6 @@ const Primary: FC = () => {
 
   return (
     <Box className={styles.rightBox}>
-      {/* <Paper className={styles.paper}> */}
       <Typography
         variant="h4"
         style={{ fontWeight: 'bold', color: theme.crossroads.dark }}
@@ -184,7 +182,6 @@ const Primary: FC = () => {
           {getButtonText()}
         </Button>
       </Box>
-      {/* </Paper> */}
     </Box>
   );
 };
