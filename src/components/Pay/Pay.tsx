@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 import { useDispatch } from 'react-redux';
 import { Box, Button, Typography } from '@material-ui/core';
@@ -14,6 +14,7 @@ import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useTheme } from '@material-ui/core/styles';
+import { useNavigate } from 'react-router-dom';
 
 import {
   UnknownObject,
@@ -22,18 +23,40 @@ import {
 
 import { costs } from '../../constants/register';
 import { setStep } from '../../store/register';
-
+import { handleRegistration } from '../../lib/handlers';
+import { Golfer } from '../../types';
 import styles from '../../sass/Register.module.scss';
 
 const Pay: FC = () => {
   const theme = useTheme();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const numGolfers = useSelector(
     (state: RootState) => state.register.numGolfers
   );
 
-  const cost = costs[numGolfers];
+  const firstName = useSelector(
+    (state: RootState) => state.register.primary.firstName
+  );
+
+  const lastName = useSelector(
+    (state: RootState) => state.register.primary.lastName
+  );
+
+  const teamName = useSelector((state: RootState) => state.register.teamName);
+
+  const teammates = useSelector((state: RootState) => state.register.teammates);
+
+  const [cost, setCost] = useState(0.01);
+
+  const isProduction = () => Boolean(process.env.NODE_ENV === 'production');
+
+  useEffect(() => {
+    if (isProduction()) {
+      setCost(costs[numGolfers]);
+    }
+  }, [numGolfers]);
 
   const handleNextStep = () => {
     dispatch(setStep(4));
@@ -59,9 +82,39 @@ const Pay: FC = () => {
     });
   };
 
+  const getTeammates = (): Golfer[] => {
+    const res: Golfer[] = [];
+
+    for (const { firstName, lastName } of Object.values(teammates)) {
+      res.push({ firstName, lastName });
+    }
+
+    return res;
+  };
+
+  const getPrimary = (): Golfer => ({ firstName, lastName });
+
   const handleApprove = async (data: Response) => {
-    const res = await data;
-    console.log(res);
+    const { orderID } = data;
+
+    const primary = getPrimary();
+    const teammates = getTeammates();
+
+    if (orderID) {
+      await handleRegistration({
+        numGolfers,
+        primary,
+        teammates,
+        teamName,
+        orderNumber: orderID,
+      });
+
+      navigate('/success', {
+        state: { orderID, numGolfers, primary, teammates, teamName },
+      });
+    } else {
+      console.log('Error');
+    }
   };
 
   const isLoading = () => {
