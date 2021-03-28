@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
 import { Box, Typography } from '@material-ui/core';
 import { useTimeout } from 'react-use';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { costs } from '../../constants/register';
 import { Golfer } from '../../types';
 
@@ -14,7 +13,6 @@ interface Props {
 }
 
 export default function Success(): JSX.Element | null {
-  const navigate = useNavigate();
   const location = useLocation();
   const [isReady] = useTimeout(5000);
 
