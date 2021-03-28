@@ -131,7 +131,6 @@ const Pay: FC = () => {
 
   return (
     <Box className={styles.rightBox}>
-      <Typography>{cost}</Typography>
       <Box style={{ marginTop: 50, width: '100%', overflowY: 'scroll' }}>
         <PayPalButtons
           createOrder={createOrder}
