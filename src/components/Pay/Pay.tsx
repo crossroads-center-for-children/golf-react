@@ -53,7 +53,7 @@ const Pay: FC = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (process.env.NODE_ENV !== 'production') {
+    if (process.env.REACT_APP_ENV === 'development') {
       setCost(0.01);
     } else {
       setCost(costs[numGolfers]);

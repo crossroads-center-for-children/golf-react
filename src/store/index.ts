@@ -7,7 +7,7 @@ const store = configureStore({
     register: registerReducer,
   },
   middleware: () => getDefaultMiddleware().concat(logger),
-  devTools: process.env.NODE_ENV !== 'production',
+  devTools: process.env.REACT_APP_ENV !== 'production',
 });
 
 export type RootState = ReturnType<typeof store.getState>;
