@@ -23,7 +23,13 @@ export async function handleRegistration(props: Props): Promise<void> {
 
     const orderId = await createOrder(props.orderNumber);
 
-    await createTeam(props.teamName, golferIds, orderId);
+    await createTeam(
+      props.teamName,
+      golferIds,
+      golfers,
+      orderId,
+      props.orderNumber
+    );
   } catch (err) {
     console.log(err);
   }
