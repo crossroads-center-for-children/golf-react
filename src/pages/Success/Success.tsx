@@ -5,6 +5,10 @@ import { costs } from '../../constants/register';
 import { Golfer } from '../../types';
 
 interface Props {
+  successData: SuccessData;
+}
+
+interface SuccessData {
   orderID: string;
   numGolfers: number;
   primary: Golfer;
@@ -16,18 +20,12 @@ export default function Success(): JSX.Element | null {
   const location = useLocation();
   const [isReady] = useTimeout(5000);
 
-  const {
-    orderID,
-    numGolfers,
-    primary,
-    teammates,
-    teamName,
-  } = location.state as Props;
+  const { successData } = location.state as Props;
 
   const getNamesOfTeammates = (): string => {
     const namesOfTeammates: string[] = [];
 
-    for (const { firstName, lastName } of teammates) {
+    for (const { firstName, lastName } of successData.teammates) {
       if (firstName && lastName) {
         namesOfTeammates.push(`${firstName} ${lastName}`);
       }
@@ -50,16 +48,16 @@ export default function Success(): JSX.Element | null {
         Details
       </Typography>
 
-      <Typography>{`Order Id: ${orderID}`}</Typography>
-      <Typography>{`Total: $${costs[numGolfers]}`}</Typography>
+      <Typography>{`Order Id: ${successData.orderID}`}</Typography>
+      <Typography>{`Total: $${costs[successData.numGolfers]}`}</Typography>
 
-      <Typography>{`Team name: ${teamName}`}</Typography>
-      <Typography>{`Number of golfers: ${numGolfers}`}</Typography>
+      <Typography>{`Team name: ${successData.teamName}`}</Typography>
+      <Typography>{`Number of golfers: ${successData.numGolfers}`}</Typography>
 
-      <Typography>{`First name: ${primary.firstName}`}</Typography>
-      <Typography>{`Last name: ${primary.lastName}`}</Typography>
+      <Typography>{`First name: ${successData.primary.firstName}`}</Typography>
+      <Typography>{`Last name: ${successData.primary.lastName}`}</Typography>
 
-      {numGolfers === 1 ? null : (
+      {successData.numGolfers === 1 ? null : (
         <Typography>{`Teammates: ${getNamesOfTeammates()}`}</Typography>
       )}
 

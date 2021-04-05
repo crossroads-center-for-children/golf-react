@@ -27,6 +27,14 @@ import { handleRegistration } from '../../lib/handlers';
 import { Golfer } from '../../types';
 import styles from '../../sass/Register.module.scss';
 
+interface SuccessData {
+  orderID: string;
+  numGolfers: number;
+  primary: Golfer;
+  teammates: Golfer[];
+  teamName: string;
+}
+
 const Pay: FC = () => {
   const theme = useTheme();
   const dispatch = useDispatch();
@@ -47,6 +55,10 @@ const Pay: FC = () => {
   const teamName = useSelector((state: RootState) => state.register.teamName);
 
   const teammates = useSelector((state: RootState) => state.register.teammates);
+
+  const [orderIsComplete, setOrderIsComplete] = useState(false);
+
+  const [successData, setSuccessData] = useState<SuccessData | null>(null);
 
   const [cost, setCost] = useState(0);
 
@@ -98,7 +110,9 @@ const Pay: FC = () => {
 
   const getPrimary = (): Golfer => ({ firstName, lastName });
 
-  const handleApprove = async (data: Response) => {
+  const handleApprove = async (data: Response, actions) => {
+    actions.order.capture();
+
     const { orderID } = data;
 
     const primary = getPrimary();
@@ -114,14 +128,33 @@ const Pay: FC = () => {
           orderNumber: orderID,
         });
 
-        navigate('/success', {
-          state: { orderID, numGolfers, primary, teammates, teamName },
+        setSuccessData({
+          orderID,
+          numGolfers,
+          primary,
+          teammates,
+          teamName,
         });
+
+        setOrderIsComplete(true);
+
+        return;
       }
     } catch (err) {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    if (orderIsComplete) {
+      console.log('hit and order complete');
+      navigate('/success', {
+        state: { successData },
+      });
+    }
+
+    console.log('hit but order not complete');
+  });
 
   if (isLoading) return null;
 
@@ -130,7 +163,7 @@ const Pay: FC = () => {
       <Box style={{ marginTop: 50, width: '100%', overflowY: 'scroll' }}>
         <PayPalButtons
           createOrder={createOrder}
-          onApprove={(data: Response) => handleApprove(data)}
+          onApprove={(data: Response, actions) => handleApprove(data, actions)}
           style={{ color: 'blue', shape: 'pill' }}
         />
       </Box>

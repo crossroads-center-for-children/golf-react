@@ -4,6 +4,7 @@ import { Teammate, Teammates } from '../types';
 
 interface RegisterState {
   step: number;
+  orderIsComplete: boolean;
   teamName: string;
   primary: Teammate;
   numGolfers: number;
@@ -15,11 +16,16 @@ export const setNumGolfers = createAction<number>('register/setNumGolfers');
 export const setTeamName = createAction<string>('register/setTeamName');
 export const setTeammates = createAction<Teammates>('register/setTeammates');
 export const setStep = createAction<number>('register/setStep');
+export const setOrderIsComplete = createAction<boolean>(
+  'register/setOrderIsComplete'
+);
 
 const initialState = {
   teamName: '',
 
   step: 1,
+
+  orderIsComplete: false,
 
   primary: {
     id: 1,
@@ -55,6 +61,9 @@ const registerReducer = createReducer(initialState, (builder) => {
     })
     .addCase(setStep, (state, action) => {
       state.step = action.payload;
+    })
+    .addCase(setOrderIsComplete, (state, action) => {
+      state.orderIsComplete = action.payload;
     })
     .addCase(addPrimary, (state, action) => {
       state.primary = action.payload;
